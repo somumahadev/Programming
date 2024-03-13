@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <time.h>
+
+#define MAX_PATIENTS 10
+
+// Structure to represent vital signs of a patient
+typedef struct {
+    float temperature; // in Celsius
+    int heart_rate;    // in beats per minute
+    int blood_pressure_systolic; // in mmHg
+    int blood_pressure_diastolic; // in mmHg
+} VitalSigns;
+
+// Structure to represent patient data
+typedef struct {
+    char name[50];
+    VitalSigns last_vital_signs;
+    bool is_under_monitoring;
+} Patient;
+
+// Global array to store patient data
+Patient patients[MAX_PATIENTS];
+
+// Function to generate random vital signs for demonstration
+VitalSigns generateRandomVitalSigns() {
+    VitalSigns vital_signs;
+    vital_signs.temperature = (float)(rand() % 10 + 360) / 10.0; // Random temperature between 36.0°C and 37.0°C
+    vital_signs.heart_rate = rand() % 80 + 60; // Random heart rate between 60 BPM and 140 BPM
+    vital_signs.blood_pressure_systolic = rand() % 40 + 90; // Random systolic BP between 90 mmHg and 130 mmHg
+    vital_signs.blood_pressure_diastolic = rand() % 30 + 60; // Random diastolic BP between 60 mmHg and 90 mmHg
+    return vital_signs;
+}
+
+// Function to simulate monitoring vital signs
+void monitorVitalSigns(int patient_index) {
+    patients[patient_index].last_vital_signs = generateRandomVitalSigns();
+    // Display the vital signs for demonstration
+    printf("Patient: %s\n", patients[patient_index].name);
+    printf("Temperature: %.1f°C\n", patients[patient_index].last_vital_signs.temperature);
+    printf("Heart Rate: %d BPM\n", patients[patient_index].last_vital_signs.heart_rate);
+    printf("Blood Pressure: %d/%d mmHg\n", patients[patient_index].last_vital_signs.blood_pressure_systolic, patients[patient_index].last_vital_signs.blood_pressure_diastolic);
+    printf("\n");
+}
+
+// Function to start monitoring a patient
+void startMonitoring(int patient_index) {
+    patients[patient_index].is_under_monitoring = true;
+    printf("Monitoring started for patient: %s\n", patients[patient_index].name);
+}
+
+// Function to stop monitoring a patient
+void stopMonitoring(int patient_index) {
+    patients[patient_index].is_under_monitoring = false;
+    printf("Monitoring stopped for patient: %s\n", patients[patient_index].name);
+}
+
+// Main function
+int main() {
+    srand(time(NULL)); // Initialize random number generator
+
+    // Initialize patient data
+    strcpy(patients[0].name, "John");
+    strcpy(patients[1].name, "Alice");
+    strcpy(patients[2].name, "Bob");
+
+    // Simulate monitoring
+    for (int i = 0; i < MAX_PATIENTS; i++) {
+        startMonitoring(i);
+        for (int j = 0; j < 3; j++) {
+            monitorVitalSigns(i);
+            // Add delay to simulate real-time monitoring
+            // In actual implementation, this would be replaced by continuous monitoring logic
+            sleep(1);
+        }
+        stopMonitoring(i);
+    }
+
+    return 0;
+}
+
