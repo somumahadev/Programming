@@ -6,10 +6,10 @@ Attendance_System
 3.	Function Usage: Can you identify the purpose of the addStudent, markAttendance, and generateReport functions in the program?
 
 4.	Conditional Statements: How does the program use conditional statements, such as if and ternary operators, 
-    to determine whether a student is present or absent and to display the attendance status in the report?
+        to determine whether a student is present or absent and to display the attendance status in the report?
 
 5.	Looping Constructs: Describe how the program utilizes loops, such as for loops and a do-while loop, 
-    to repeatedly present the menu to the user and perform tasks based on their input.
+        to repeatedly present the menu to the user and perform tasks based on their input.
 
 6.	What is the purpose of the addStudent function in the program?
 
